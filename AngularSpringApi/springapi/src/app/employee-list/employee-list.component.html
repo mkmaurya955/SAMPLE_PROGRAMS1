@@ -1,0 +1,84 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<div style="text-align: center">
+    <h1>{{message}}</h1>
+</div>
+
+<div class="container">
+    <!-- <div class="row" [hidden]="submitted"> -->
+        
+        <div class="row"></div>
+        <div class="col-md-6" >
+            <h1 style="color: blueviolet;text-align: center;">Post Employee Information</h1>
+            <hr>
+            <form (ngSubmit)="onSubmit()">
+                <fieldset>
+                    <div class="form-group">
+                        <label for="id"><span class="req">* </span> Id: <small>This will be your login user
+                                id</small> </label>
+                        <input required type="text" [(ngModel)]="employee.id" name="id" id="id"
+                            class="form-control phone" maxlength="28" placeholder="Enter your ID..." />
+                    </div>
+                        
+                    <div class="form-group">
+                        <label for="Name"><span class="req">* </span> Title: <small>This will be your login user
+                                name</small> </label>
+                        <input required type="text" [(ngModel)]="employee.title" name="title" id="title"
+                            class="form-control phone" maxlength="28" placeholder="Enter your title..." />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstname"><span class="req">* </span> Completed: </label>
+                        <input class="form-control" type="text" [(ngModel)]="employee.completed" name="completed" id="txt" required
+                            placeholder="Enter valid Completed as true or false" />
+                        <div id="errFirst"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <button class="btn btn-success" type="submit">Submit</button>
+                    </div>
+                </fieldset>
+            </form><!-- ends register form -->
+            <!-- second for to fiter user-->
+        </div><!-- ends col-6 -->
+        <div class="col-md-6">
+            <h1 style="color: blueviolet;text-align: center;">Employee List</h1>
+            <hr>
+            <table border="1" align="center">
+                <tr style="text-align: center;">
+                    <th>ID</th>
+                    <th>TITLE</th>
+                    <th>COMPLETED</th>
+                    <th>DATE</th>
+                    <th>ACTION</th>
+                </tr>
+                <tr *ngFor="let employee of employees | async" style="width: 300px; text-align: center;padding: 50px;">
+                <td>{{ employee.id }}</td>
+                <td>{{ employee.title }}</td>
+                <td>{{ employee.completed }}</td>
+                <td>{{ employee.createdAt }}</td>
+                <td>
+                    <button (click)="newEmployee()">
+                        <span style="color: blue;">Add</span>
+                    </button>
+                    <button (click)='empdel(employee.id)'>
+                        <span style="color: red;">Delete</span>
+                    </button>
+                </td> 
+        
+                </tr>
+            </table>
+              <!-- <button type="button" class="button btn-danger" (click)='deleteCustomers()'>Delete All</button>
+            </div> -->
+        </div>
+        
+
+    </div>
+    <!-- <div [hidden]="!submitted">
+        <h4>You submitted successfully!</h4>
+        
+      </div>
+</div> -->
+
